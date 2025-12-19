@@ -7,11 +7,16 @@ import Select from "react-select";
 import { IoCloudUploadOutline } from "react-icons/io5";
 import { IoIosClose } from "react-icons/io";
 import { useRef, useState } from "react";
+import { createPost } from "../../apis/posts/postsApi";
+import { usecreatePostMutation } from "../../mutations/postMutations";
 
 function AddPostModal({isOpen, onRequestClose, layoutRef}) {
+    const [ visibilityOption , setVisibilityOption ] = useState({label: "Public", value: "Public"});
+    const [ textareaValue, setTextareaValue ] = useState("");
     const [ uploadImages, setUploadImages ] = useState([]);
     const imageListBoxRef = useRef();
     const {isLoading, data} = useMeQuery();
+    const createPostMutation = usecreatePostMutation();
 
     const handleOnWheel = (e) => {  
         imageListBoxRef.current.scrollLeft += e.deltaY;
@@ -41,9 +46,31 @@ function AddPostModal({isOpen, onRequestClose, layoutRef}) {
 
             Promise
             .all(fileArray.map(file => readFile(file)))
-            .then(result => { 
+            .then(result => {
                 setUploadImages([...uploadImages, ...result]);
             });
+        }
+    }
+
+    const handleImageDeleteOnClick = (index) => {
+        const deletedImages = uploadImages.filter((img, imgIndex) => imgIndex !== index)
+        setUploadImages(deletedImages)
+    }
+
+    const handlePostSubmitOnClick = async () => {
+        const formData = new FormData();
+        formData.append("visibility", visibilityOption.value);
+        formData.append("content", textareaValue);
+        for (let img of uploadImages) {
+            formData.append("files", img.file);
+        }
+        try {
+            await createPostMutation.mutateAsync(formData);
+            alert("작성 완료");
+            onRequestClose();
+        } catch (error) {
+            alert(error.response.data.message);
+
         }
     }
 
@@ -73,6 +100,9 @@ function AddPostModal({isOpen, onRequestClose, layoutRef}) {
         parentSelector={() => layoutRef.current}
         appElement={layoutRef.current}
         ariaHideApp={false}>
+            {
+                createPostMutation.isPending && <Loading />
+            }
             <div css={s.modalLayout}>
                 <header>
                     <h2>Add a Post</h2>
@@ -92,9 +122,11 @@ function AddPostModal({isOpen, onRequestClose, layoutRef}) {
                                 label: "Follow",
                                 value: "Follow"
                             },
-                        ]} />
+                        ]} 
+                        value={visibilityOption}
+                        onChange={(option) => setVisibilityOption(option)}/>
                     <div css={s.contentInputBox}>
-                        <textarea></textarea>
+                        <textarea value={textareaValue} onChange={(e) => setTextareaValue(e.target.value)}></textarea>
                     </div>
                     <div css={s.uploadBox} onClick={handleFileLoadOnClick}>
                         <IoCloudUploadOutline />
@@ -102,10 +134,10 @@ function AddPostModal({isOpen, onRequestClose, layoutRef}) {
                         <button>Add Image</button>
                     </div>
                     <div css={s.imageListBox} ref={imageListBoxRef} onWheel={handleOnWheel}>
-                        {        
-                            uploadImages.map(img => (
+                        {
+                            uploadImages.map((img, index) => (
                                 <div css={s.preview(img.dataURL)}>
-                                    <div><IoIosClose /></div>
+                                    <div onClick={() => handleImageDeleteOnClick(index)}><IoIosClose /></div>
                                 </div>
                             ))
                         }
@@ -113,7 +145,7 @@ function AddPostModal({isOpen, onRequestClose, layoutRef}) {
                     </div>
                 </main>
                 <footer>
-                    <button css={s.postButton}>Post</button>
+                    <button css={s.postButton} onClick={handlePostSubmitOnClick}>Post</button>
                     <button onClick={onRequestClose}>Cancel</button>
                 </footer>
             </div>

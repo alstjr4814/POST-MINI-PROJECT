@@ -3,7 +3,6 @@ import { requestMe } from "../apis/users/usersApi";
 
 export const useMeQuery = () => {
     const accessToken = localStorage.getItem("AccessToken");
-    console.log(accessToken)
     return useQuery({
         queryKey: ["me", accessToken],
         queryFn: async () => {
