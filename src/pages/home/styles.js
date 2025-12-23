@@ -1,6 +1,5 @@
 import { css } from "@emotion/react";
 
-
 export const layout = css`
     display: flex;
     box-sizing: border-box;
@@ -9,37 +8,62 @@ export const layout = css`
     height: 100%;
 `;
 
-export const feedContainer = css`
+export const feedContainer = (commentOpen) => css`
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 20px;
-    width: 65%;
-    overflow-y: auto;
+    width: 60%;
+    overflow-y: ${commentOpen ? "hidden" : "auto"};
 
     &::-webkit-scrollbar {
         display: none;
     }
 `;
 
-export const followInfoCotainer = css`
+export const followInfoContainer = css`
     box-sizing: border-box;
     margin-top: 20px;
     padding-left: 20px;
     width: 35%;
-`;
+`;  
 
 export const feedItemContainer = css`
-    margin: 10px;
+    margin-top: 20px;
     box-sizing: border-box;
     border-radius: 8px;
     padding: 10px;
     width: 400px;
     background-color: #ffffff;
     box-shadow: 0 0 10px #00000066;
+
     & > header {
         display: flex;
         height: 40px;
+    }
+
+    & > main {
+        padding: 10px 0;
+    }
+
+    & > footer {
+        display: flex;
+        gap: 5px;
+        box-sizing: border-box;
+        border-top: 1px solid #dbdbdb;
+        padding: 5px 5px 0;
+
+        & > div {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        & > div:nth-of-type(1) {
+            font-size: 24px;
+        }
+        & > div:nth-of-type(2) {
+            font-size: 21px;
+        }
     }
 `;
 
@@ -56,27 +80,50 @@ export const profileImage = (url) => css`
 `;
 
 export const userInfo = css`
-    display: felx;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     height: 100%;
 
-     & > div:nth-of-type(1) {
+    & > div:nth-of-type(1) {
         font-size: 14px;
         font-weight: 500;
         color: #222222;
-     }
+    }
 
-     & > div:nth-of-type(2) {
+    & > div:nth-of-type(2) {
         font-size: 10px;
-        color: #888888; 
-     }
-
+        color: #888888;
+    }
 `;
 
 export const feedImageContainer = css`
+    & .slick-prev {
+        left: 15px;
+        z-index: 2;
+        &::before {
+            color: black;
+            font-size: 30px;
+        }
+    }
 
+    & .slick-next {
+        right: 15px;
+        z-index: 2;
+        &::before {
+            color: black;
+            font-size: 30px;
+        }
+    }
 `;
+
+export const feedImage = (url) => css`
+    width: 100%;
+    height: 380px;
+    background-image: url("${url}");
+    background-position: center;
+    background-size: cover;
+`
 
 export const feedContentContainer = css`
     box-sizing: border-box;
@@ -87,4 +134,19 @@ export const feedContentContainer = css`
     word-wrap: break-word;
     font-size: 14px;
     color: #222222;
+`;
+
+export const commentContainer = (commentOpen) => css`
+    position: absolute;
+    right: 20px;
+    margin-top: 20px;
+    box-sizing: border-box;
+    border-radius: 8px;
+    width: 260px;
+    height: 540px;
+    box-shadow: 0 0 10px #00000066;
+    background-color: #ffffff;
+    overflow: hidden;
+    transition: all 0.2s ease-in-out;
+    opacity: ${commentOpen ? 1 : 0};
 `;

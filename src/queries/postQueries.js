@@ -3,11 +3,10 @@ import { getFeeds } from "../apis/posts/postsApi";
 
 export const useGetFeeds = () => useInfiniteQuery({
     queryKey: ["feeds"],
-    queryFn: async ({pageParam = 1}) => await getFeeds({currentPage: pageParam, size: 10}),
+    queryFn: async ({ pageParam = 1 }) => await getFeeds({currentPage: pageParam, size: 10}),
     getNextPageParam: (lastPage, allPages) => {
-        const currentpage = lastPage.data.currentPage;
+        const currentPage = lastPage.data.currentPage;
         const totalPages = lastPage.data.totalPages;
-        return lastPage.data.isLast ? undefined : currentpage + 1; 
+        return lastPage.data.isLast ? undefined : currentPage + 1;
     }
 });
-

@@ -38,6 +38,7 @@ export const modalLayout = css`
             box-sizing: border-box;
             border: none;
             background-color: transparent;
+            color: #222222;
             cursor: pointer;
             font-size: 16px;
         }
@@ -46,42 +47,45 @@ export const modalLayout = css`
 
 export const postButton = css`
     text-shadow: 0 0 10px #000000aa;
+    &:disabled {
+        cursor: default;
+        color: #777777;
+    }
 `;
 
-export const profileContaner = css`
+export const profileContainer = css`
     display: flex;
     align-items: center;
     margin-bottom: 10px;
     padding: 0 10px;
-    cursor: pointer;
+    cursor: default;
 `;
 
 export const profileImg = (url) => css`
     margin-right: 10px;
     border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    background-image: url()(${url});
+    width: 35px;
+    height: 35px;
+    background-image: url(${url});
     background-position: center;
     background-size: cover;
-
 `;
 
 export const contentInputBox = css`
     margin: 10px 0;
 
     & > textarea {
-    box-sizing: border-box;
-    outline: none;
-    border: 1px silid #aaaaaa;
-    border-radius: 4px;
-    padding: 5px 10px;
-    width: 100%;
-    height: 80px;
-    resize: none;
-    font-size: 15px;
-    color: #222222;
-    cursor: pointer;
+        box-sizing: border-box;
+        outline: none;
+        border: 1px solid #cccccc;
+        border-radius: 4px;
+        padding: 5px 10px;
+        width: 100%;
+        height: 80px;
+        resize: none;
+        font-size: 15px;
+        color: #222222;
+        cursor: pointer;
     }
 `;
 
@@ -92,16 +96,16 @@ export const uploadBox = css`
     box-sizing: border-box;
     border: 1px dashed #cccccc;
     border-radius: 4px;
-    color: #222222;
     padding: 10px;
+    color: #222222;
     cursor: pointer;
-    
+
     & > button {
-    margin: 10px 0 0;
-    border: none;
-    border-radius: 10px;
-    padding: 5px 10px;
-    cursor: pointer;
+        margin: 10px 0 0;
+        border: none;
+        border-radius: 10px;
+        padding: 5px 10px;
+        cursor: pointer;
     }
 `;
 
@@ -117,14 +121,13 @@ export const imageListBox = css`
     background-color: #fafafa;
     overflow-x: auto;
     overflow-y: hidden;
-
 `;
 
 export const preview = (url) => css`
     flex-shrink: 0;
     position: relative;
     box-sizing: border-box;
-    border: 1px solid #dbdbdb ;
+    border: 1px solid #dbdbdb;
     border-radius: 4px;
     width: 70px;
     height: 70px;
@@ -138,21 +141,20 @@ export const preview = (url) => css`
 
     & > div {
         transform: translate(-50%, -50%);
-    position: absolute;
-    display: flex;
-    top: 50%;
-    left: 50%;
-    justify-content: center;
-    align-items: center;
-    box-sizing: border-box;
-    border: 1px solid #dbdbdb;
-    border-radius: 8px;
-    width: 40px;
-    height: 40px;
-    font-size: 20px;
-    color: #ffffff;
-    background-color: #00000066;
-    cursor: pointer;
-}
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-sizing: border-box;
+        border: 1px solid #dbdbdb;
+        border-radius: 8px;
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+        color: #ffffff;
+        background-color: #00000066;
+        cursor: pointer;
+    }
 `
-

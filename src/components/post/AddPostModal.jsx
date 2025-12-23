@@ -6,17 +6,22 @@ import Loading from "../common/Loading";
 import Select from "react-select";
 import { IoCloudUploadOutline } from "react-icons/io5";
 import { IoIosClose } from "react-icons/io";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createPost } from "../../apis/posts/postsApi";
-import { usecreatePostMutation } from "../../mutations/postMutations";
+import { useCreatePostMutation } from "../../mutations/postMutations";
 
-function AddPostModal({isOpen, onRequestClose, layoutRef}) {
-    const [ visibilityOption , setVisibilityOption ] = useState({label: "Public", value: "Public"});
+function AddPostModal({isOpen, onRequestClose, layoutRef, setHomeRefresh}) {
+    const [ visibilityOption, setVisibilityOption ] = useState({label: "Public", value: "Public"});
     const [ textareaValue, setTextareaValue ] = useState("");
     const [ uploadImages, setUploadImages ] = useState([]);
+    const [ disabled, setDisabled ] = useState(true);
     const imageListBoxRef = useRef();
     const {isLoading, data} = useMeQuery();
-    const createPostMutation = usecreatePostMutation();
+    const createPostMutation = useCreatePostMutation();
+
+    useEffect(() => {
+        setDisabled(!textareaValue && !uploadImages.length);
+    }, [textareaValue, uploadImages]);
 
     const handleOnWheel = (e) => {  
         imageListBoxRef.current.scrollLeft += e.deltaY;
@@ -53,8 +58,8 @@ function AddPostModal({isOpen, onRequestClose, layoutRef}) {
     }
 
     const handleImageDeleteOnClick = (index) => {
-        const deletedImages = uploadImages.filter((img, imgIndex) => imgIndex !== index)
-        setUploadImages(deletedImages)
+        const deletedImages = uploadImages.filter((img, imgIndex) => imgIndex !== index);
+        setUploadImages(deletedImages);
     }
 
     const handlePostSubmitOnClick = async () => {
@@ -67,10 +72,10 @@ function AddPostModal({isOpen, onRequestClose, layoutRef}) {
         try {
             await createPostMutation.mutateAsync(formData);
             alert("작성 완료");
+            setHomeRefresh(true);
             onRequestClose();
-        } catch (error) {
+        } catch(error) {
             alert(error.response.data.message);
-
         }
     }
 
@@ -84,6 +89,7 @@ function AddPostModal({isOpen, onRequestClose, layoutRef}) {
                 position: "absolute",
                 top: 0,
                 left: 0,
+                zIndex: 20,
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
@@ -122,9 +128,9 @@ function AddPostModal({isOpen, onRequestClose, layoutRef}) {
                                 label: "Follow",
                                 value: "Follow"
                             },
-                        ]} 
+                        ]}
                         value={visibilityOption}
-                        onChange={(option) => setVisibilityOption(option)}/>
+                        onChange={(option) => setVisibilityOption(option)} />
                     <div css={s.contentInputBox}>
                         <textarea value={textareaValue} onChange={(e) => setTextareaValue(e.target.value)}></textarea>
                     </div>
@@ -141,11 +147,10 @@ function AddPostModal({isOpen, onRequestClose, layoutRef}) {
                                 </div>
                             ))
                         }
-                        
                     </div>
                 </main>
                 <footer>
-                    <button css={s.postButton} onClick={handlePostSubmitOnClick}>Post</button>
+                    <button css={s.postButton} onClick={handlePostSubmitOnClick} disabled={disabled}>Post</button>
                     <button onClick={onRequestClose}>Cancel</button>
                 </footer>
             </div>
