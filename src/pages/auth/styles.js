@@ -86,7 +86,7 @@ export const sideBarContainer = css`
         & > a {
             text-decoration: none;
             color: #222222;
-        }
+        }               
     }
 
     & > div {

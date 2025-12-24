@@ -56,5 +56,6 @@ const { isLoading, data } = meQuery; 해당 구조를 사용하는것에 대하�
             이렇게 mequery라는 객체가 있고 그안의 상태를 사용하기 위해서 일일이 선언하는 걸 한줄로 줄인거야.
 
         
-            
+        
 
+const { isLoading, data} = meQuery
