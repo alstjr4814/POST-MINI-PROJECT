@@ -301,3 +301,24 @@ pathname.startsWith("/auth"): 이미 로그인했는데 주소창에 auth/login�
 하면 true가 되면 maps("/")가 실행이 되면서 홈으로 돌려보낸다.
 
 함수명(() => {},[]) = 중의 []은 의존성배열
+
+
+
+
+
+1. 스트림 데이터 공장의 자동화 라인의의 마지막 궁금증 풀고 ->
+2,3인  스트림,인터페이스,예외처리 시작해야 함
+
+src안에 파일을 만들면 안되고 gitignore라는 파일 위에다가 파일이 보이면 된다.
+src -> .env 을 만들어 VITE_OPENAI_API_KEY=  코드를 작성하고 키를 기입 
+gitignore의 최상단에 .evn 을 기입하면 git에 안올라간다.
+
+해당부분을 env 키 입력에 기입
+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
+
+
+
+
+
+
+DI (의존성 주입): 아까 말한 "Main이 고민 없이 꽂는다"를 스프링이 어떻게 자동으로 해주는지. (@Autowired)

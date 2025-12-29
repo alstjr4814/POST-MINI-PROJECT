@@ -7,6 +7,7 @@ import { useCreatePostCommentMutation } from "../../mutations/postMutations";
 function Comment({postId}) {
     const [ inputValue, setInputValue ] = useState("");
     const commentMutation = useCreatePostCommentMutation();
+    const { isLoading, data } = useGetCommentsQuery(postId);
 
     const handleOnChange = (e) => {
         setInputValue(e.target.value);
@@ -30,16 +31,23 @@ function Comment({postId}) {
         }
     }
 
+    console.log(data);
+
     return <div css={s.layout}>
         <h2>댓글</h2>
         <div css={s.commentItemList}>
-            <div css={s.commentItem}>
-                <div>
-                    <div></div>
-                    <div></div>
-                </div>
-                <div></div>
-            </div>
+            {
+                isLoading &&
+                data.data.map(comment=> (
+                    <div css={s.commentItem}>
+                        <div>
+                            <div>{comment.imgUrl}</div>
+                            <div>{comment.nickname}</div>
+                        </div>
+                        <div>{comment.content}</div>
+                    </div>
+                ))
+            }
         </div>
         <div>
             <div css={s.commentInput}>
