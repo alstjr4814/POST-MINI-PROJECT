@@ -250,22 +250,6 @@ const { isLoading, data } = meQuery; 해당 구조를 사용하는것에 대하�
                 const data = meQuery.data;           // 2번 꺼내기
             이렇게 mequery라는 객체가 있고 그안의 상태를 사용하기 위해서 일일이 선언하는 걸 한줄로 줄인거야.
 
-const navigate = useNavigate(): 운전대 함수이다 
-    - Maps("/auth/login") 이라고 하면 주소를 강제로 바꿔서 그 페이지로 이동
-const location = useLocation(): 이건 현재 내 위치를 알려주는 gps/네비게이션 이다.
+        
+            
 
-const {pathname} = location : location객체 안에는 주소, 쿼리스트링 등 여러 정보가 
-    - 들어있다. 거서 현재주소라는 필드값만 뽑아서 변수로 만든 것
-    - 객체 개념: location이라는 객체 안에 pathnmae이라는 필드를 사용하는 것
-
-useEffect(() => {...},[감시대상]):
-    - 작동조건: useEffect는 감시 대상이 변할 때마다 안의 내용을 실행해.
-
-(!pathname.startsWith("/auth"): pathname은 location 즉 현재 내 위치를 알려주는
-    - 변수로 .startWith("/auth"): 현재주소가 /auth로 시작하는가?
-    - 해석: 현재위치가 로그인이나 회원가입 페이지가 아닌 곳인가?
-
-pathname.startsWith("/auth"): 이미 로그인했는데 주소창에 auth/login을 쳐서 들어오라고
-    하면 true가 되면 maps("/")가 실행이 되면서 홈으로 돌려보낸다.
-
-함수명(() => {},[]) = 중의 []은 의존성배열
