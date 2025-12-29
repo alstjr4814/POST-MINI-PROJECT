@@ -314,7 +314,6 @@ src -> .env 을 만들어 VITE_OPENAI_API_KEY=  코드를 작성하고 키를 �
 gitignore의 최상단에 .evn 을 기입하면 git에 안올라간다.
 
 해당부분을 env 키 입력에 기입
-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
 
 
 
