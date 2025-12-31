@@ -1,4 +1,5 @@
 import { css } from "@emotion/react";
+import loginBg from "../../assets/login_bg.jpg";
 
 export const layout = css`
     display: flex;
@@ -8,132 +9,78 @@ export const layout = css`
     height: 100%;
 `;
 
-export const frame = css`
+export const container = css`
     display: flex;
-    box-sizing: border-box;
-    border: 3px solid #747474;
-    border-radius: 30px;
-    padding: 30px;
-    min-width: 1000px;
-    width: 1000px;
-    height: 650px;
-    background-color: #000000;
-`;
-
-export const frameContainer = css`
-    position: relative;
-    box-sizing: border-box;
     border-radius: 10px;
-    width: 100%;
-    height: 100%;
-    background-color: #f3f5f7;
+    width: 80%;
+    height: 80%;
+    background-color: #ffffff;
+    box-shadow: 0 0 5px 1px #00000033;
     overflow: hidden;
 `;
 
-
-
-////////////<< Loading >>////////////
-export const loadingBox = css`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 99;
-    width: 100%;
-    height: 100%;
-    background-color: #00000066;
+export const leftBackground = css`
+    width: 360px;
+    background-image: url(${loginBg});
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 `;
 
-////////////<< LeftSideBar >>////////////
-
-export const sideBarLayout = css`
-    position: relative;
-    display: flex;
-    width: 100%;
-    height: 100%;
-`;
-
-export const sideBarContainer = css`
+export const rightContainer = css`
     display: flex;
     flex-direction: column;
-    width: 200px;
-    height: 100%;
-    background-color: #ffffff;
-    box-shadow: 0 0 5px #00000055;
+    align-items: center;
+    flex-grow: 1;
+    padding: 30px;
 
     & > h1 {
-        margin: 20px;
-        font-size: 20px;
-        text-align: center;
-        text-shadow: 0 0 20px #00000099;
-        cursor: default;
-        transition: all 0.3s ease-in-out;
-        &:hover {
-            transform: scale(105%);
-        }
+        color: #222222;
     }
 
-    & > ul {
-        list-style-type: none;
+    & > p {
+        margin: 0;
+        margin-bottom: 60px;
+        font-size: 14px;
+        color: #555555;
+    }
+
+    & > div {
         display: flex;
         flex-direction: column;
-        margin: 0;
-        padding: 0;
-        gap: 8px;
-        flex-grow: 1;
-        & > a {
-            text-decoration: none;
-            color: #222222;
-        }               
-    }
+        align-items: center;
+        width: 100%;
+        gap: 15px;
 
-    & > div {
-        display: flex;
-        justify-content: center;
-        padding: 20px;
-
-        & > a {
-            text-decoration: none;
-            color: #222222;
+        & > button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            width: 100%;
+            box-sizing: border-box;
+            border: 1px solid #dbdbdbff;
+            border-radius: 6px;
+            height: 36px;
+            cursor: pointer;
             font-weight: 500;
-            text-shadow: 0 0 10px #00000088;
         }
     }
 `;
 
-export const menuListItem = (isSelected) => css`
-    display: flex;
-    align-items: center;
-    box-sizing: border-box;
-    padding: 5px 15px;
-    width: 100%;
-    height: 35px;
-    font-weight: 500;
-    transition: all 0.1s ease-in-out;
-    box-shadow: 0 0 ${isSelected ? "10px 10px" : "0 0"} #0000000f inset;
-    &:hover {
-        text-shadow: 0 0 15px #00000066;
-    }
+export const google = css`
+    background-color: #ffffff;
+`;
 
-    & > div {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-right: 5px;
-        width: 30px;
-        height: 100%;
-        font-size: 20px;
+export const naver = css`
+    background-color: #03a94d;
+    color: #ffffff;
+    & > svg {
+        font-size: 10px;
     }
 `;
 
-export const profileImg = (url) => css`
-    border-radius: 50%;
-    width: 25px;
-    height: 25px;
-    overflow: hidden;
-    background-image: url(${url});
-    background-position: center;
-    background-size: cover;
+export const kakao = css`
+    background-color: #fee500;
+    color: #181600;
 `;

@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { createPost } from "../apis/posts/postsApi";
-import { createComments } from "../apis/posts/commentsApi";
+import { createComments } from "../apis/posts/CommentsApi";
 
 export const useCreatePostMutation = () => useMutation({
     mutationKey: ["createPost"],
@@ -14,4 +14,4 @@ export const useCreatePostCommentMutation = () => useMutation({
     mutationFn: async ({postId, data}) => {
         return await createComments(postId, data);
     }
-}); 
+});
