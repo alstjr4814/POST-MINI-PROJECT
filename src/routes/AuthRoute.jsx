@@ -8,6 +8,13 @@ import Logout from "../pages/auth/Logout";
 import Loading from "../components/common/Loading";
 import Home from "../pages/home/Home";
 import LeftSideBar from "../components/common/LeftSideBar";
+import MainLayout from "../components/common/MainLayout";
+// import FridgeHome from "../pages/fridge/FridgeHome";
+// import MyFridge from "../pages/fridge/MyFridge";
+// import Recipe from "../pages/fridge/Recipe";
+import FridgeHome from "../pages/fridge-apple/FridgeHome";
+import MyFridge from "../pages/fridge-apple/MyFridge";
+import Recipe from "../pages/fridge-apple/Recipe";
 
 function AuthRoute() {
     const navigate = useNavigate();
@@ -42,12 +49,26 @@ function AuthRoute() {
         </Routes>
     }
 
-    return <LeftSideBar>
+    return (
         <Routes>
-            <Route path="/" element={<Home />} />
+            {/* 1. 냉장고: MainLayout 없이 전체 화면 (지금 잘 나오는 상태 유지) */}
+            <Route path="/" element={<FridgeHome />} />
+            <Route path="/my-fridge" element={<MyFridge />} />
+            <Route path="/recipe" element={<Recipe />} />
+            
+            {/* 2. 기존 피드: 여기에만 MainLayout을 입혀서 예전 디자인 복구 */}
+            <Route path="/feed" element={
+                <MainLayout>
+                    <LeftSideBar>
+                        <Home />
+                    </LeftSideBar>
+                </MainLayout>
+            } />
+            
             <Route path="/logout" element={<Logout />} />
         </Routes>
-    </LeftSideBar>
+    );
 }
+
 
 export default AuthRoute;

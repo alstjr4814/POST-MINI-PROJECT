@@ -1,0 +1,797 @@
+/* === 모든 CSS를 하나의 파일로 통합 === */
+
+
+/* === 색상 변수 === */
+
+:root {
+  --cream: #fff8e7;
+  --orange-light: #ffd4a3;
+  --orange: #ff9f5a;
+  --orange-dark: #e8854a;
+  --green-light: #b8e6c1;
+  --green: #7bc47f;
+  --green-dark: #5a9e5e;
+  --gray-light: #f5f5f5;
+  --gray: #e0e0e0;
+  --text-dark: #4a4a4a;
+  --text-light: #7a7a7a;
+  --white: #ffffff;
+  --shadow: rgba(0, 0, 0, 0.1);
+}
+
+/* ============================================
+   FridgeHome 스타일
+   ============================================ */
+.fridge-home {
+  min-height: 100vh;
+  background: linear-gradient(180deg, var(--cream) 0%, var(--orange-light) 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px;
+  font-family: "Pretendard", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.title {
+  font-size: 2.5rem;
+  color: var(--orange-dark);
+  margin-bottom: 8px;
+  text-shadow: 2px 2px 0 var(--white);
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  color: var(--text-light);
+  margin-bottom: 30px;
+}
+
+/* 냉장고 컨테이너 */
+.fridge-container {
+  perspective: 1000px;
+  margin-bottom: 30px;
+}
+
+.fridge {
+  position: relative;
+  width: 200px;
+  height: 300px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.fridge:hover {
+  transform: scale(1.02);
+}
+
+/* 냉장고 본체 */
+.fridge-body {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: var(--gray-light);
+  border-radius: 16px;
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.05), 0 10px 30px var(--shadow);
+  overflow: hidden;
+}
+
+/* 냉장고 내부 */
+.fridge-inside {
+  width: 100%;
+  height: 100%;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  background: linear-gradient(180deg, #e8f4fc 0%, #d4ebf8 100%);
+}
+
+.shelf {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 3px solid rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+}
+
+.food-item {
+  font-size: 1.8rem;
+  animation: foodBounce 2s ease-in-out infinite;
+}
+
+.food-item:nth-child(2) {
+  animation-delay: 0.3s;
+}
+
+.food-item:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+@keyframes foodBounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+/* 냉장고 문 */
+.fridge-door {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--white) 0%, var(--gray-light) 100%);
+  border-radius: 16px;
+  box-shadow: 0 4px 15px var(--shadow), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  transform-origin: left center;
+  transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.fridge.open .fridge-door {
+  transform: rotateY(-110deg);
+}
+
+.door-handle {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 50px;
+  background: linear-gradient(180deg, var(--gray) 0%, #bdbdbd 100%);
+  border-radius: 4px;
+  box-shadow: 0 2px 4px var(--shadow);
+}
+
+.door-brand {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--green);
+  letter-spacing: 3px;
+  opacity: 0.8;
+}
+
+/* 액션 버튼들 */
+.action-buttons {
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.5s ease;
+  pointer-events: none;
+}
+
+.action-buttons.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.action-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 20px 30px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: inherit;
+  box-shadow: 0 6px 20px var(--shadow);
+}
+
+.action-btn:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px var(--shadow);
+}
+
+.action-btn:active {
+  transform: translateY(-2px);
+}
+
+.ingredients-btn {
+  background: linear-gradient(135deg, var(--green-light) 0%, var(--green) 100%);
+  color: var(--white);
+}
+
+.recipe-btn {
+  background: linear-gradient(135deg, var(--orange-light) 0%, var(--orange) 100%);
+  color: var(--white);
+}
+
+.btn-icon {
+  font-size: 2rem;
+}
+
+.btn-text {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.hint-text {
+  margin-top: 20px;
+  font-size: 0.95rem;
+  color: var(--text-light);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* ============================================
+   MyFridge 스타일
+   ============================================ */
+.my-fridge {
+  min-height: 100vh;
+  background: var(--cream);
+  padding: 0 0 30px 0;
+  font-family: "Pretendard", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* 헤더 */
+.mf-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  background: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.mf-title {
+  font-size: 1.3rem;
+  color: var(--text-dark);
+  margin: 0;
+}
+
+.back-btn,
+.add-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.back-btn {
+  background: var(--gray-light);
+  color: var(--text-light);
+}
+
+.back-btn:hover {
+  background: #e8e8e8;
+}
+
+.add-btn {
+  background: linear-gradient(135deg, var(--green) 0%, var(--green-dark) 100%);
+  color: white;
+}
+
+.add-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(123, 196, 127, 0.4);
+}
+
+/* 카테고리 필터 */
+.category-filter {
+  display: flex;
+  gap: 10px;
+  padding: 20px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.category-filter::-webkit-scrollbar {
+  display: none;
+}
+
+.filter-chip {
+  padding: 10px 20px;
+  border: 2px solid var(--gray);
+  border-radius: 25px;
+  background: white;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-light);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  font-family: inherit;
+}
+
+.filter-chip:hover {
+  border-color: var(--orange);
+  color: var(--orange);
+}
+
+.filter-chip.active {
+  background: linear-gradient(135deg, var(--orange-light) 0%, var(--orange) 100%);
+  border-color: transparent;
+  color: white;
+}
+
+/* 재료 개수 */
+.ingredient-count {
+  padding: 0 20px;
+  margin-bottom: 15px;
+  font-size: 0.95rem;
+  color: var(--text-light);
+}
+
+.ingredient-count strong {
+  color: var(--orange);
+}
+
+/* 재료 카드 리스트 */
+.ingredient-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 0 20px;
+}
+
+/* 재료 카드 */
+.ingredient-card {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 18px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.ingredient-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 5px;
+}
+
+.ingredient-card.safe::before {
+  background: var(--green);
+}
+
+.ingredient-card.warning::before {
+  background: #ffd93d;
+}
+
+.ingredient-card.urgent::before {
+  background: var(--orange);
+}
+
+.ingredient-card.expired::before {
+  background: #ff6b6b;
+}
+
+.ingredient-card:hover {
+  transform: translateX(5px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+.card-icon {
+  font-size: 2.5rem;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--cream);
+  border-radius: 12px;
+}
+
+.card-info {
+  flex: 1;
+}
+
+.card-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin: 0 0 4px 0;
+}
+
+.card-category {
+  font-size: 0.85rem;
+  color: #ababab;
+}
+
+/* D-Day 뱃지 */
+.card-dday {
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.card-dday.safe {
+  background: #e8f5e9;
+  color: var(--green-dark);
+}
+
+.card-dday.warning {
+  background: #fff9e6;
+  color: #e6b800;
+}
+
+.card-dday.urgent {
+  background: #fff0e6;
+  color: var(--orange-dark);
+}
+
+.card-dday.expired {
+  background: #ffe6e6;
+  color: #d32f2f;
+}
+
+/* 삭제 버튼 */
+.card-delete {
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 50%;
+  background: var(--gray-light);
+  color: #ababab;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-delete:hover {
+  background: #ff6b6b;
+  color: white;
+}
+
+/* 빈 상태 */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  color: #ababab;
+}
+
+.empty-icon {
+  font-size: 4rem;
+  margin-bottom: 20px;
+  opacity: 0.5;
+}
+
+.empty-state p {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.empty-sub {
+  font-size: 0.9rem !important;
+  margin-top: 8px !important;
+}
+
+/* ============================================
+   Recipe 페이지 스타일
+   ============================================ */
+.recipe-page {
+  min-height: 100vh;
+  background: var(--cream);
+  padding-bottom: 30px;
+  font-family: "Pretendard", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* 헤더 */
+.recipe-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  background: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.recipe-title {
+  font-size: 1.3rem;
+  color: var(--text-dark);
+  margin: 0;
+}
+
+/* 매칭 정보 배너 */
+.match-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 20px;
+  margin: 20px;
+  background: linear-gradient(135deg, var(--orange-light) 0%, var(--orange) 100%);
+  border-radius: 12px;
+  color: white;
+}
+
+.match-icon {
+  font-size: 1.5rem;
+}
+
+.match-info p {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+/* 레시피 리스트 */
+.recipe-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 0 20px;
+}
+
+/* 레시피 카드 - 유튜브 스타일 */
+.recipe-card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.recipe-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+.recipe-card:hover .play-overlay {
+  opacity: 1;
+}
+
+/* 썸네일 */
+.recipe-thumbnail {
+  position: relative;
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+}
+
+.recipe-thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.recipe-card:hover .recipe-thumbnail img {
+  transform: scale(1.05);
+}
+
+/* 재생시간 뱃지 */
+.recipe-duration {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.75);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+/* 매칭률 뱃지 */
+.recipe-match {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: linear-gradient(135deg, var(--green) 0%, var(--green-dark) 100%);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+/* 재생 오버레이 */
+.play-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 180px;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.play-icon {
+  width: 60px;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: #ff6b6b;
+  padding-left: 5px;
+}
+
+/* 레시피 정보 */
+.recipe-info {
+  padding: 16px;
+}
+
+.recipe-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin: 0 0 6px 0;
+  line-height: 1.3;
+}
+
+.recipe-channel {
+  font-size: 0.85rem;
+  color: #ababab;
+  margin: 0 0 12px 0;
+}
+
+/* 메타 정보 */
+.recipe-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.difficulty {
+  padding: 5px 12px;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.difficulty.easy {
+  background: #e8f5e9;
+  color: var(--green-dark);
+}
+
+.difficulty.normal {
+  background: #fff0e6;
+  color: var(--orange-dark);
+}
+
+/* 재료 태그 */
+.recipe-ingredients {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.ingredient-tag {
+  background: var(--gray-light);
+  color: var(--text-light);
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+}
+
+.ingredient-more {
+  background: var(--orange-light);
+  color: var(--orange-dark);
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+/* ============================================
+   반응형 스타일
+   ============================================ */
+@media (max-width: 480px) {
+  /* FridgeHome */
+  .title {
+    font-size: 2rem;
+  }
+
+  .fridge {
+    width: 160px;
+    height: 240px;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .action-btn {
+    padding: 15px 40px;
+    flex-direction: row;
+  }
+
+  /* MyFridge */
+  .mf-header {
+    padding: 15px;
+  }
+
+  .mf-title {
+    font-size: 1.1rem;
+  }
+
+  .back-btn,
+  .add-btn {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+  }
+
+  .ingredient-card {
+    padding: 14px;
+    gap: 12px;
+  }
+
+  .card-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 2rem;
+  }
+
+  /* Recipe */
+  .recipe-header {
+    padding: 15px;
+  }
+
+  .recipe-title {
+    font-size: 1.1rem;
+  }
+
+  .match-info {
+    margin: 15px;
+    padding: 12px 15px;
+  }
+
+  .recipe-list {
+    padding: 0 15px;
+  }
+
+  .recipe-thumbnail {
+    height: 160px;
+  }
+
+  .play-overlay {
+    height: 160px;
+  }
+}
+
+
